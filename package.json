@@ -1,0 +1,13 @@
+{
+  "name": "myy-node-cli",
+  "version": "1.0.0",
+  "main": "main.js",
+  "bin": "main.js",
+  "license": "MIT",
+  "devDependencies": {
+    "inquirer": "8.0.0"
+  },
+  "dependencies": {
+    "ejs": "^3.1.8"
+  }
+}
