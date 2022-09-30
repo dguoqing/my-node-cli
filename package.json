@@ -1,13 +1,11 @@
 {
   "name": "myy-node-cli",
   "version": "1.0.0",
-  "main": "main.js",
-  "bin": "main.js",
+  "bin": "./bin/cli.js",
   "license": "MIT",
-  "devDependencies": {
-    "inquirer": "8.0.0"
-  },
   "dependencies": {
-    "ejs": "^3.1.8"
+    "chalk": "^4.1.2",
+    "commander": "^9.4.1",
+    "ora": "^5.4.1"
   }
 }
