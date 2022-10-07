@@ -1,12 +1,23 @@
 {
   "name": "my-node-cli",
-  "version": "1.0.0",
-  "bin": "./bin/cli.js",
+  "version": "1.0.1",
+  "bin": {
+    "ldcli": "./bin/cli.js"
+  },
   "license": "MIT",
   "dependencies": {
+    "axios": "^1.0.0",
     "chalk": "^4.1.2",
     "commander": "^9.4.1",
     "cross-spawn": "^7.0.3",
+    "download-git-repo": "^3.0.2",
+    "figlet": "^1.5.2",
+    "fs-extra": "^10.1.0",
+    "inquirer": "8.0.0",
     "ora": "^5.4.1"
+  },
+  "author": {
+    "name": "dongguoqing",
+    "email": "878744510@qq.com"
   }
 }

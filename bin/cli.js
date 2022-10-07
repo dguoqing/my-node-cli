@@ -1,80 +1,68 @@
 #! /usr/bin/env node
 
-const program = require('commander')
 const chalk = require('chalk')
-const ora = require('ora');
-const spawn = require('cross-spawn')
+const program = require('commander')
+const figlet = require('figlet')
 
-// program.version('0.1.0').command('create <name>').description('create a project').action(name => {
-//     // 打印命令行输入的值
-
-//     // 文本样式
-//     console.log("project name is " + chalk.bold(name))
-
-//     // 颜色
-//     console.log("project name is " + chalk.cyan(name))
-//     console.log("project name is " + chalk.green(name))
-
-//     // 背景色
-//     console.log("project name is " + chalk.bgRed(name))
-
-//     // 使用RGB颜色输出
-//     console.log("project name is " + chalk.rgb(4, 156, 219).underline(name));
-//     console.log("project name is " + chalk.hex('#049CDB').bold(name));
-//     console.log("project name is " + chalk.bgHex('#049CDB').bold(name))
-
-// })
-// program.parse()
-
-// // 自定义文本信息
-// const message = 'Loading unicorns'
-// // 初始化
-// const spinner = ora(message);
-// // 开始加载动画
-// spinner.start();
-
-// setTimeout(() => {
-//     // 修改动画样式
-
-//     // Type: string
-//     // Default: 'cyan'
-//     // Values: 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'magenta' | 'cyan' | 'white' | 'gray'
-//     spinner.color = 'red';    
-//     spinner.text = 'Loading rainbows';
-
-//     setTimeout(() => {
-//         // 加载状态修改
-//         spinner.stop() // 停止
-//         spinner.succeed('Loading succeed'); // 成功 ✔
-//         // spinner.fail(text?);  失败 ✖
-//         // spinner.warn(text?);  提示 ⚠
-//         // spinner.info(text?);  信息 ℹ
-//     }, 2000);
-// }, 2000);
+program
+    //定义命令和参数
+    .command('create <app-name>')
+    .option('sdfa')
+    .description('create a new project')
+    //-f or --force 为强制创建，如果创建的目录存在则直接覆盖
+    .option('-f, --force', 'overwirite target directory if it eexist')
+    .action((name, option) => {
+        //打印一下执行的结果
+        console.log('执行结果','name', name, 'option', option)
+        require('../lib/create.js')(name,option)
+    })
 
 
+program
+
+//配置版本号信息
+.version(`v${require('../package.json').version}`)
+.usage('<command> [option]')
+
+//配置config的命令
+program.command('config [value]')
+    .description('inspect and modify the config')
+    .option('-g, --get <path>', 'get value from option')
+    .option('-s, --set <path> <value>')
+    .option('-d, --delete <path>', 'delete option from config')
+    .action((name, options) => {
+        console.log('配置config中的命令参数',name, options)
+    })
 
 
-//执行shell 的命令
+// 配置ui 命令
 
-//定义需要的依赖
-const dependecies = ['vue', 'vuex', 'vue-router']
-
-//执行安装
-
-const child = spawn('yarn', ['add', '-D'].concat(dependecies), {
-    stdio:'inherit'
+program.command('ui')
+.description('start add open roc-cli ui')
+.option('-p, --port <port>', 'delete option from config')
+.action((value, options) => {
+    console.log('这是ui 命令的参数', value, options)
 })
 
+//配置help
 
-//监听执行结果
+program.on('--help', () => {
 
-child.on('close', code => {
+    //使用 figlet 绘制logo
+    console.log('\r\n' + figlet.textSync('ldcli',{
+        font:'Ghost',
+        horizontalLayout:'default',
+        verticalLayout:'default',
+        width:80,
+        whitespaceBreak:true
+    }))
 
-    if(code === 0){
-        //执行成功
-        console.log(chalk.cyan('install finished'))
-    }else{
-        console.log(chalk.red('下载依赖失败'))
-    }
+    //新增说明信息
+    console.log(`\r\nRun ${chalk.cyan(`ldcli <command> --help`)} for detail uasge given command \r\n`)
 })
+
+//解析用户输入的指令时传入的参数
+
+program.parse(process.argv)
+
+// console.log('canshu',process.argv)
