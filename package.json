@@ -1,5 +1,5 @@
 {
-  "name": "my-node-cli",
+  "name": "mr-dong",
   "version": "1.0.1",
   "bin": {
     "ldcli": "./bin/cli.js"
